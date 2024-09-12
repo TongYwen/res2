@@ -40,7 +40,7 @@ def haversine(lat1, lon1, lat2, lon2):
 
 def find_nearby_restaurants(lat, lng, df, max_distance_km=5):
     df['distance'] = df.apply(lambda row: haversine(lat, lng, row['latitude'], row['longitude']), axis=1)
-    nearby_restaurants = df[df['distance'] <= max_distance_km].sort_values(by='distance').head(10)
+    nearby_restaurants = df[df['distance'] <= max_distance_km].sort_values(by='distance').head(5)
     return nearby_restaurants
 
 # Load your dataset with restaurant name, address, URL, latitude, and longitude
@@ -107,7 +107,7 @@ if user_input:
                     st.markdown(
     """
     <p style='font-family:"Comic Sans MS", cursive; font-size:20px;'>
-    Top 10 Restaurants within 5 km:
+    Top 5 Restaurants within 5 km:
     </p>
     """, 
     unsafe_allow_html=True
