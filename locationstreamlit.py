@@ -46,11 +46,32 @@ def find_nearby_restaurants(lat, lng, df, max_distance_km=5):
 # Load your dataset with restaurant name, address, URL, latitude, and longitude
 df_with_lat_lon = pd.read_excel('df_with_lat_lon.xlsx')
 
+# Remove duplicates based on the 'name' column
+df_with_lat_lon = df_with_lat_lon.drop_duplicates(subset=['name'])
+
 # Streamlit application interface
-st.title("Nearby Restaurant Finder with Map")
+st.markdown(
+    """
+    <h1 style='font-family:Forte; color:#white; font-size:35px; text-align:center;'>
+    Nearby Restaurant Finder with Map
+    </h1>
+    """, 
+    unsafe_allow_html=True
+)
+
+
 
 # Step 1: Enter a location
-user_input = st.text_input('Type a location')
+st.markdown(
+    """
+    <label style='font-family:"Comic Sans MS", cursive; font-size:18px;'>
+    Enter a location:
+    </label>
+    """, 
+    unsafe_allow_html=True
+)
+
+user_input = st.text_input('', key='location_input')
 
 if user_input:
     suggestions = get_autocomplete_suggestions(user_input)
@@ -62,14 +83,35 @@ if user_input:
             coordinates = get_lat_long(selected_address)
             
             if coordinates:
-                st.write(f"Selected Location: {selected_address}")
-                st.write(f"Latitude: {coordinates[0]}, Longitude: {coordinates[1]}")
+                st.markdown(
+    f"""
+    <p style='font-family:"Comic Sans MS", cursive; font-size:14px;'>
+    Selected Location: {selected_address}
+    </p>
+    """, 
+    unsafe_allow_html=True
+)
+                st.markdown(
+    f"""
+    <p style='font-family:"Comic Sans MS", cursive; font-size:15px;'>
+    Latitude: {coordinates[0]}, Longitude: {coordinates[1]}
+    </p>
+    """, 
+    unsafe_allow_html=True
+)
                 
                 # Step 3: Find nearby restaurants
                 nearby_restaurants = find_nearby_restaurants(coordinates[0], coordinates[1], df_with_lat_lon)
                 
                 if not nearby_restaurants.empty:
-                    st.write("Top 10 Restaurants within 5 km:")
+                    st.markdown(
+    """
+    <p style='font-family:"Comic Sans MS", cursive; font-size:20px;'>
+    Top 10 Restaurants within 5 km:
+    </p>
+    """, 
+    unsafe_allow_html=True
+)
                     st.dataframe(nearby_restaurants[['name', 'distance', 'url']])
                     
                     # Displaying map using folium
