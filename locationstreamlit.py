@@ -32,7 +32,7 @@ def haversine(lat1, lon1, lat2, lon2):
     R = 6371  # Earth radius in kilometers
     phi1, phi2 = np.radians(lat1), np.radians(lat2)
     dphi = np.radians(lat2 - lat1)
-    dlambda = np.radians(lon2 - lon1)
+    dlambda = np.radians(lon1 - lon2)
 
     a = np.sin(dphi/2.0)**2 + np.cos(phi1) * np.cos(phi2) * np.sin(dlambda/2.0)**2
     c = 2 * np.arctan2(np.sqrt(a), np.sqrt(1 - a))
@@ -40,7 +40,7 @@ def haversine(lat1, lon1, lat2, lon2):
 
 def find_nearby_restaurants(lat, lng, df, max_distance_km=5):
     df['distance'] = df.apply(lambda row: haversine(lat, lng, row['latitude'], row['longitude']), axis=1)
-    nearby_restaurants = df[df['distance'] <= max_distance_km]
+    nearby_restaurants = df[df['distance'] <= max_distance_km].sort_values(by='distance').head(10)
     return nearby_restaurants
 
 # Load your dataset with restaurant name, address, URL, latitude, and longitude
@@ -69,8 +69,8 @@ if user_input:
                 nearby_restaurants = find_nearby_restaurants(coordinates[0], coordinates[1], df_with_lat_lon)
                 
                 if not nearby_restaurants.empty:
-                    st.write("Restaurants within 5 km:")
-                    st.dataframe(nearby_restaurants[['name', 'latitude', 'longitude', 'distance', 'url']])
+                    st.write("Top 10 Restaurants within 5 km:")
+                    st.dataframe(nearby_restaurants[['name', 'distance', 'url']])
                     
                     # Displaying map using folium
                     m = folium.Map(location=[coordinates[0], coordinates[1]], zoom_start=13)
