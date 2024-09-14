@@ -63,32 +63,31 @@ st.markdown(
         background-image: url("{image_url}");
         background-size: cover;
     }}
-    .table-container {{
-        background-color: rgba(255, 255, 255, 0.8);  /* Lighter background with transparency */
+     .table-container {{
+        background-color: rgba(50, 50, 50, 0.9); 
         padding: 20px;
         border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);  /* Reduced shadow */
-        overflow-x: auto;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
+        overflow-x: auto; 
     }}
     table {{
         width: 100%;
         border-collapse: collapse;
-        table-layout: auto;
-    }}
+        table-layout: auto; 
     th, td {{
-        border: 1px solid #555;
+        border: 1px solid #555; 
         padding: 8px;
         text-align: left;
     }}
     th {{
-        background-color: #444;  /* Slightly lighter header */
-        color: #ffffff;
+        background-color: #333; 
+        color: #ffffff; 
     }}
     td {{
-        color: #333;  /* Darker font for table cells */
+        color: #ffffff; 
     }}
     td.url {{
-        color: #1a0dab;  /* Google-style link color */
+        color: #1a0dab; 
     }}
     </style>
     """,
