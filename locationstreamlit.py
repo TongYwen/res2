@@ -71,7 +71,7 @@ st.markdown(
         overflow-x: auto; 
     }}
     table {{
-        width: 50%;
+        width: 100%;
         border-collapse: collapse;
         table-layout: auto; 
     th, td {{
