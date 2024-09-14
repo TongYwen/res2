@@ -65,19 +65,19 @@ st.markdown(
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        height: 100vh; /* Make the background cover the full height */
-        width: 100vw; /* Make the background cover the full width */
-        margin: 0; /* Remove default margin */
-        padding: 0; /* Remove default padding */
+        height: 100vh; 
+        width: 100vw; 
+        margin: 0; 
+        padding: 0; 
     }}
     
     /* Container for the table and map */
     .content-container {{
-        width: 100%; /* Use the full width of the screen */
-        max-width: 1200px; /* Restrict the content width for better readability */
+        width: 100%; 
+        max-width: 1100px; /* Restrict the content width for better readability */
         margin: 0 auto; /* Center the content */
         padding: 20px; /* Add some padding */
-        background-color: rgba(255, 255, 255, 0.8); /* Lighten the background for readability */
+        background-color: rgba(255, 255, 255, 0.8); 
         border-radius: 10px;
     }}
 
