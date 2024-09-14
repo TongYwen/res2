@@ -118,32 +118,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Wrap the content (table and map) inside a content container for better responsiveness
-st.markdown(
-    """
-    <div class="content-container">
-    <h1 style='font-family:Forte; color:#333; font-size:35px; text-align:center;'>
-    Nearby Restaurant Finder with Map
-    </h1>
-    </div>
-    """, 
-    unsafe_allow_html=True
-)
-
-# Step 1: Enter a location
-st.markdown(
-    """
-    <div class="content-container">
-    <label style='font-family:"Comic Sans MS", cursive; color:#333; font-size:25px;'>
-    Enter a location:
-    </label>
-    <p style='font-size:20px;'> Example: Harborside Financial Center - Plaza 5, Jersey City, NJ 07311
-    </p>
-    </div>
-    """, 
-    unsafe_allow_html=True
-)
-
 st.markdown(
     """
     <h1 style='font-family:Forte; color:#white; font-size:35px; text-align:center;'>
