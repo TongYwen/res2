@@ -54,7 +54,7 @@ if 'URL' not in df_with_lat_lon.columns:
     df_with_lat_lon['URL'] = df_with_lat_lon['Name'].apply(lambda name: f"https://www.google.com/search?q={name.replace(' ', '+')}")
 
 # Streamlit application interface
-
+image_url = "https://www.restolacuisine.com/restaurants/restaurant-la-cuisine/website/images/Lacuisine_resto.jpg"
 st.markdown(
     f"""
     <style>
