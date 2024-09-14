@@ -178,7 +178,7 @@ if user_input:
                         ).add_to(m)
                     
                     # Display map using streamlit_folium
-                    st_folium(m, width=705, height=600)
+                    st_folium(m, width=700, height=500)
                 else:
                     st.write("No restaurants found within 5 km.")
             else:
