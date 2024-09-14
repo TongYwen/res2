@@ -54,6 +54,7 @@ if 'URL' not in df_with_lat_lon.columns:
     df_with_lat_lon['URL'] = df_with_lat_lon['Name'].apply(lambda name: f"https://www.google.com/search?q={name.replace(' ', '+')}")
 
 # Streamlit application interface
+
 image_url = "https://www.restolacuisine.com/restaurants/restaurant-la-cuisine/website/images/Lacuisine_resto.jpg"
 st.markdown(
     f"""
@@ -61,48 +62,32 @@ st.markdown(
     .stApp {{
         background-image: url("{image_url}");
         background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;  /* Ensures background stays fixed while scrolling */
-        height: 100vh; /* Ensures the background covers the full height of the viewport */
     }}
-
-    /* Style for the container holding the table */
-    .table-container {{
-        background-color: rgba(50, 50, 50, 0.8);  /* Darken background for better contrast */
+     .table-container {{
+        background-color: rgba(50, 50, 50, 0.9); 
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
         overflow-x: auto; 
-        margin-bottom: 20px;
     }}
-
-    /* Style for the table */
     table {{
         width: 100%;
         border-collapse: collapse;
         table-layout: auto; 
-    }}
-
-    /* Style for table headers */
     th, td {{
         border: 1px solid #555; 
         padding: 8px;
         text-align: left;
     }}
     th {{
-        background-color: #333;  /* Dark background for headers */
-        color: #ffffff;  /* White text for headers */
+        background-color: #333; 
+        color: #ffffff; 
     }}
-
-    /* Style for table data cells */
     td {{
-        color: #ffffff;  /* White text for data cells */
+        color: #ffffff; 
     }}
-
-    /* Style for clickable URL links */
     td.url {{
-        color: #1a0dab;  /* Standard blue for clickable links */
+        color: #1a0dab; 
     }}
     </style>
     """,
@@ -111,7 +96,7 @@ st.markdown(
 
 st.markdown(
     """
-    <h1 style='font-family:Forte; color:#333; font-size:35px; text-align:center;'>
+    <h1 style='font-family:Forte; color:#white; font-size:35px; text-align:center;'>
     Nearby Restaurant Finder with Map
     </h1>
     """, 
@@ -121,7 +106,7 @@ st.markdown(
 # Step 1: Enter a location
 st.markdown(
     """
-    <label style='font-family:"Comic Sans MS", cursive; color:#333; font-size:25px;'>
+    <label style='font-family:"Comic Sans MS", cursive; color:#white; font-size:25px;'>
     Enter a location:
     </label>
     <p style='font-size:20px;'> Example: Harborside Financial Center - Plaza 5, Jersey City, NJ 07311
@@ -129,7 +114,6 @@ st.markdown(
     """, 
     unsafe_allow_html=True
 )
-
 user_input = st.text_input('', key='location_input')
 
 if user_input:
@@ -194,7 +178,7 @@ if user_input:
                         ).add_to(m)
                     
                     # Display map using streamlit_folium
-                    st_folium(m, width=500, height=500)
+                    st_folium(m, width=705, height=600)
                 else:
                     st.write("No restaurants found within 5 km.")
             else:
