@@ -62,18 +62,42 @@ st.markdown(
     .stApp {{
         background-image: url("{image_url}");
         background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        height: 100vh; /* Make the background cover the full height */
+        width: 100vw; /* Make the background cover the full width */
+        margin: 0; /* Remove default margin */
+        padding: 0; /* Remove default padding */
     }}
-     .table-container {{
-        background-color: rgba(50, 50, 50, 0.9); 
+    
+    /* Container for the table and map */
+    .content-container {{
+        width: 100%; /* Use the full width of the screen */
+        max-width: 1200px; /* Restrict the content width for better readability */
+        margin: 0 auto; /* Center the content */
+        padding: 20px; /* Add some padding */
+        background-color: rgba(255, 255, 255, 0.8); /* Lighten the background for readability */
+        border-radius: 10px;
+    }}
+
+    /* Style for the container holding the table */
+    .table-container {{
+        background-color: rgba(50, 50, 50, 0.8);  
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
         overflow-x: auto; 
+        margin-bottom: 20px;
     }}
+
+    /* Style for the table */
     table {{
         width: 100%;
         border-collapse: collapse;
         table-layout: auto; 
+    }}
+
     th, td {{
         border: 1px solid #555; 
         padding: 8px;
@@ -91,6 +115,32 @@ st.markdown(
     }}
     </style>
     """,
+    unsafe_allow_html=True
+)
+
+# Wrap the content (table and map) inside a content container for better responsiveness
+st.markdown(
+    """
+    <div class="content-container">
+    <h1 style='font-family:Forte; color:#333; font-size:35px; text-align:center;'>
+    Nearby Restaurant Finder with Map
+    </h1>
+    </div>
+    """, 
+    unsafe_allow_html=True
+)
+
+# Step 1: Enter a location
+st.markdown(
+    """
+    <div class="content-container">
+    <label style='font-family:"Comic Sans MS", cursive; color:#333; font-size:25px;'>
+    Enter a location:
+    </label>
+    <p style='font-size:20px;'> Example: Harborside Financial Center - Plaza 5, Jersey City, NJ 07311
+    </p>
+    </div>
+    """, 
     unsafe_allow_html=True
 )
 
