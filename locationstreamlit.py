@@ -6,7 +6,7 @@ from streamlit_folium import st_folium
 import folium
 
 # Initialize the Google Maps client with your API key
-API_KEY = 'AIzaSyDK7boLSVOjAK2lPx6NoOrBYPaXLpCAUoA'  # Replace with your actual API key
+API_KEY = 'AIzaSyDK7boLSVOjAK2lPx6NoOrBYPaXLpCAUoA'
 gmaps = googlemaps.Client(key=API_KEY)
 
 def get_autocomplete_suggestions(input_text):
@@ -55,38 +55,40 @@ if 'URL' not in df_with_lat_lon.columns:
 
 # Streamlit application interface
 
+image_url = "https://www.restolacuisine.com/restaurants/restaurant-la-cuisine/website/images/Lacuisine_resto.jpg"
 st.markdown(
-    """
+    f"""
     <style>
-    .stApp {
-        background-color: #f0f0f0;
-    }
-     .table-container {
+    .stApp {{
+        background-image: url("{image_url}");
+        background-size: cover;
+    }}
+     .table-container {{
         background-color: rgba(50, 50, 50, 0.9); 
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
         overflow-x: auto; 
-    }
-    table {
+    }}
+    table {{
         width: 100%;
         border-collapse: collapse;
         table-layout: auto; 
-    th, td {
+    th, td {{
         border: 1px solid #555; 
         padding: 8px;
         text-align: left;
-    }
-    th {
+    }}
+    th {{
         background-color: #333; 
         color: #ffffff; 
-    }
-    td {
+    }}
+    td {{
         color: #ffffff; 
-    }
-    td.url {
+    }}
+    td.url {{
         color: #1a0dab; 
-    }
+    }}
     </style>
     """,
     unsafe_allow_html=True
@@ -94,7 +96,7 @@ st.markdown(
 
 st.markdown(
     """
-    <h1 style='font-family:Forte; color:#333; font-size:35px; text-align:center;'>
+    <h1 style='font-family:Forte; color:#white; font-size:35px; text-align:center;'>
     Nearby Restaurant Finder with Map
     </h1>
     """, 
@@ -104,7 +106,7 @@ st.markdown(
 # Step 1: Enter a location
 st.markdown(
     """
-    <label style='font-family:"Comic Sans MS", cursive; color:#333; font-size:25px;'>
+    <label style='font-family:"Comic Sans MS", cursive; color:#white; font-size:25px;'>
     Enter a location:
     </label>
     <p style='font-size:20px;'> Example: Harborside Financial Center - Plaza 5, Jersey City, NJ 07311
@@ -157,31 +159,26 @@ if user_input:
                     # Convert the URLs to clickable links in the dataframe
                     nearby_restaurants['URL'] = nearby_restaurants.apply(lambda row: f'<a href="{row["URL"]}" class="url" target="_blank">{row["Name"]}</a>', axis=1)
                     
-                    # Create two columns for the table and the map
-                    col1, col2 = st.columns([1, 1])
-
-                    with col1:
-                        # Display table in first column
-                        col1.markdown('<div class="table-container">' + nearby_restaurants[['Name', 'distance', 'URL']].to_html(escape=False, index=False) + '</div>', unsafe_allow_html=True)
-
-                    with col2:
-                        # Displaying map using folium in the second column
-                        m = folium.Map(location=[coordinates[0], coordinates[1]], zoom_start=12)
-                        
-                        # Add a marker for the selected location
-                        folium.Marker([coordinates[0], coordinates[1]], tooltip='Selected Location').add_to(m)
-                        
-                        # Add markers for nearby restaurants
-                        for idx, row in nearby_restaurants.iterrows():
-                            folium.Marker(
-                                [row['latitude'], row['longitude']], 
-                                popup=row['Name'],
-                                tooltip=row['Name']
-                            ).add_to(m)
-                        
-                        # Display map using streamlit_folium
-                        st_folium(m, width=705, height=600)
-
+                    # Create a placeholder for the table
+                    table_placeholder = st.empty()
+                    table_placeholder.markdown('<div class="table-container">' + nearby_restaurants[['Name', 'distance', 'URL']].to_html(escape=False, index=False) + '</div>', unsafe_allow_html=True)
+                    
+                    # Displaying map using folium
+                    m = folium.Map(location=[coordinates[0], coordinates[1]], zoom_start=12)
+                    
+                    # Add a marker for the selected location
+                    folium.Marker([coordinates[0], coordinates[1]], tooltip='Selected Location').add_to(m)
+                    
+                    # Add markers for nearby restaurants
+                    for idx, row in nearby_restaurants.iterrows():
+                        folium.Marker(
+                            [row['latitude'], row['longitude']], 
+                            popup=row['Name'],
+                            tooltip=row['Name']
+                        ).add_to(m)
+                    
+                    # Display map using streamlit_folium
+                    st_folium(m, width=705, height=600)
                 else:
                     st.write("No restaurants found within 5 km.")
             else:
